@@ -1,1 +1,102 @@
 /* CSS declarations go here */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: black;
+  background-attachment: fixed;
+  color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  margin: 0 10%;
+  font-size: 14px;
+}
+
+
+users-panel, chat-panel {
+  float: left;
+}
+
+.app-header {
+  height: 10vh;
+}
+
+.app-footer {
+  height: 10vh;
+}
+
+.users-panel {
+  height: 80vh;
+  position: relative;
+}
+
+.chat-panel {
+  height: 80vh;
+  position: relative;
+}
+
+.chat-input {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 10vh;
+  width: 100%;
+  border: 1px solid blue
+}
+.chat-thread {
+  position: absolute;
+  left: 0;
+  bottom: 10vh;
+  height: 70vh;
+  width: 100%;
+  border-bottom: 1px solid white
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    border: 1px solid red;
+}
+
+.col-1 {
+  width: 8.33%;
+}
+.col-2 {
+  width: 16.66%;
+}
+.col-3 {
+  width: 25%;
+}
+.col-4 {
+  width: 33.33%;
+}
+.col-5 {
+  width: 41.66%;
+}
+.col-6 {
+  width: 50%;
+}
+.col-7 {
+  width: 58.33%;
+}
+.col-8 {
+  width: 66.66%;
+}
+.col-9 {
+  width: 75%;
+}
+.col-10 {
+  width: 83.33%;
+}
+.col-11 {
+  width: 91.66%;
+}
+.col-12 {
+  width: 100%;
+}
