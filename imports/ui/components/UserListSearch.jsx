@@ -1,13 +1,19 @@
 import React from 'react';
+import { TextInput, IconButton } from './input';
 
-class UserListSearch extends React.Component {
-  render() {
-    return (
-      <div>
-        User List UserListSearch
-      </div>
-    );
-  }
+const UserListSearch = () => {
+  return (
+    <div>
+      <TextInput
+        className="search-users"
+        placeholder="Search Users"
+      />
+      <IconButton
+        className="user-search-icon"
+        iconName="fa fa-search"
+      />
+    </div>
+  );
 }
 
 export default UserListSearch;

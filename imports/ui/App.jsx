@@ -13,14 +13,17 @@ class App extends React.Component {
     return (
       <div>
         <div className="app-header row">
-          Meteorite Chat
+          <span><i className="fa fa-comments-o fa-lg" aria-hidden="true"></i> Meteorite Chat</span>
         </div>
-        <div className="row">
+        <div className="row main">
           <UsersPanel />
           <ChatPanel />
+          <div className="col-2">
+            Ads should be here
+          </div>
         </div>
         <div className="app-footer row">
-          Footer Meteorite
+          <span>Meteor.js Solution</span>
         </div>
       </div>
     );

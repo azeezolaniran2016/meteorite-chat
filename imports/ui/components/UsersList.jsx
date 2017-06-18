@@ -1,13 +1,17 @@
 import React from 'react';
+import UserListItem from './UserListItem';
 
-class UserList extends React.Component {
-  render() {
-    return (
-      <div>
-        UserList
-      </div>
-    );
-  }
+const UserList = () => {
+  const users = [
+    {name: 'Olaniran Azeez'}, {name: 'Olaniran Akeem'}, {name: 'Olaniran Ahmed'}
+  ].map((usr, index) => <UserListItem key={index} name={usr.name}/>);
+  return (
+    <div  className="user-list">
+      <ul>
+        {users}
+      </ul>
+    </div>
+  );
 }
 
 export default UserList;

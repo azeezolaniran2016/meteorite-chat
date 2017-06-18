@@ -1,12 +1,13 @@
 import React from 'react';
 
 const TextArea = (props) => {
-  const { className, text, handleChange } = props;
+  const { className, text, handleChange, placeholder } = props;
   return (
     <textarea
       value={text}
       className={className}
       onChange={handleChange}
+      placeholder={placeholder}
     />
   );
 }

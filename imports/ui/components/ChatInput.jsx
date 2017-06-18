@@ -26,16 +26,21 @@ class ChatInput extends React.Component {
     const { message } = this.state;
     return (
       <div className="chat-input">
+        <div className="col-11">
         <TextArea
           className="chat-text-input"
           text={message}
           handleChange={this.composeMessage}
+          placeholder="Enter your message..."
         />
+        </div>
+        <div className="col-1">
         <IconButton
-          className="chat-send-button"
-          iconName="fa fa-send fa-3x"
+          className="input-icon"
+          iconName="fa fa-send fa-2x"
           handleClick={this.sendMessage}
         />
+        </div>
       </div>
     );
   }

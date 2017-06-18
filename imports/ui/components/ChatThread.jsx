@@ -11,6 +11,7 @@ const ChatThread = (props) => {
    ];
   const messages = testMessages.map((msg, index) => {
       return (<ChatMessage
+        className={`chat-message ${index % 2 === 0 ? 'msg-in': 'msg-out'}`}
         key={index}
         id={msg.id}
         message={`${index} >> ${msg.message}`}
@@ -23,7 +24,6 @@ const ChatThread = (props) => {
       <ul>
         {messages}
       </ul>
-      Chat ChatThread
     </div>
   );
 }
