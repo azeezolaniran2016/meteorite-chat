@@ -12,14 +12,14 @@ class ChatThread extends React.Component {
     chatThread.scrollTop = chatThread.scrollHeight - chatThread.clientHeight;
   }
   render() {
-    const { messages } = this.props;
+    const { messages, selectedUser } = this.props;
     const msgItems = messages.map((msg, index) => {
         return (<ChatMessage
-          className={`chat-message ${index % 2 === 0 ? 'msg-in': 'msg-out'}`}
+          className={`chat-message ${selectedUser._id === msg.sender._id ? 'msg-out': 'msg-in'}`}
           key={msg._id}
           id={msg._id}
           message={msg.message}
-          senderName={msg.senderName}
+          senderName={msg.sender.username}
           time={msg.time}
         />);
     });

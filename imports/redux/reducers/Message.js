@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/Constants';
-import { Messages } from '../../../api/db';
+import { Messages } from '../../../api/models';
 
 export default (state = {}, action) => {
   switch(action.type) {

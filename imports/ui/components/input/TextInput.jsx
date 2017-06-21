@@ -1,9 +1,10 @@
 import React from 'react';
 
 const TextInput = (props) => {
-  const { type, className, value, handleChange, placeholder } = props;
+  const { id, type, className, value, handleChange, placeholder } = props;
   return (
     <input
+      id={id}
       type={type}
       value={value}
       className={className}
@@ -19,6 +20,7 @@ const TextInput = (props) => {
 //   className: React.PropTypes.string.isRequired,
 //   value: React.PropTypes.string.isRequired,
 //   handleChange: React.PropTypes.func.isRequired
+//   id: React.PropTypes.string.isRequired
 // }
 
 export default TextInput;

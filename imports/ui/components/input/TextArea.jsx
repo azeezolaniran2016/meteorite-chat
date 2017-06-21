@@ -1,9 +1,10 @@
 import React from 'react';
 
 const TextArea = (props) => {
-  const { className, text, handleChange, placeholder, sendMessage, enterNewLine } = props;
+  const { id, className, text, handleChange, placeholder, sendMessage, enterNewLine } = props;
   return (
     <textarea
+      id={id}
       value={text}
       className={className}
       onChange={handleChange}
@@ -22,6 +23,7 @@ const TextArea = (props) => {
 //   className: React.PropTypes.string.isRequired,
 //   text: React.PropTypes.string.isRequired,
 //   handleChange: React.PropTypes.func.isRequired
+//   id: React.PropTypes.string.isRequired
 // }
 
 export default TextArea;

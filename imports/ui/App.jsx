@@ -1,39 +1,63 @@
 import React from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
+import { Accounts } from 'meteor/accounts-base';
 import { connect } from 'react-redux';
 import ChatPanel from './components/ChatPanel';
 import UsersPanel from './components/UsersPanel';
-import { Messages } from '../../api/db';
-import * as MessageActions from '../redux/actions/Message'
+import SignupForm from './components/authentication/SignupForm';
+import LoginForm from './components/authentication/LoginForm';
+import { Messages } from '../../api/models';
+import * as MessageActions from '../redux/actions/Message';
+import * as UserActions from '../redux/actions/User';
 
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      message: ''
+      message: '',
+      loginEmail: '',
+      loginPassword: '',
+      signupEmail: '',
+      signupPassword: '',
+      signupUsername: '',
+      selectedUser: {},
+      signinSelected: true,
+      searchUsername: ''
     }
     this.composeMessage = this.composeMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.enterNewLine = this.enterNewLine.bind(this);
+    this.login = this.login.bind(this);
+    this.signup = this.signup.bind(this);
+    this.handleSignout = this.handleSignout.bind(this);
+    this.onTextInputChange = this.onTextInputChange.bind(this);
+    this.selectChatUser = this.selectChatUser.bind(this);
+    this.toggleAuthTab = this.toggleAuthTab.bind(this);
   }
 
   sendMessage(e) {
     e.preventDefault();
-    const { message } = this.state;
+    const { message, selectedUser } = this.state;
     if (!message.trim()) {
       return;
     }
-    const { dispatch } = this.props;
+    const { dispatch, user } = this.props;
     const msgObj = {
       message,
-      receiverName: 'test receiver',
-      senderName: 'test sender',
+      receiver: selectedUser,
+      sender: {
+        username: user.username, _id: user._id
+      },
       isGeneral: true,
       time: new Date().toLocaleTimeString()
     }
     dispatch(MessageActions.sendMessage(msgObj));
     this.setState({ message: ''});
+  }
+
+  toggleAuthTab() {
+    this.setState({ signinSelected: !this.state.signinSelected });
   }
 
   enterNewLine(e) {
@@ -47,27 +71,134 @@ class App extends React.Component {
     this.setState({ message: event.target.value });
   }
 
+  onTextInputChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+
+  login(event) {
+    event.preventDefault();
+    const { loginEmail, loginPassword } = this.state;
+    this.props
+      .dispatch(UserActions.login({
+        email: loginEmail, password: loginPassword
+      }));
+    this.setState({ loginPassword: '' });
+  }
+
+  selectChatUser(event) {
+    const { users } = this.props;
+    const id = event.target.id;
+    const selectedUser = users.find(user => user._id === id );
+    this.setState({ 
+      selectedUser: {
+        username: selectedUser.username, _id: selectedUser._id
+      }
+    });
+  }
+
+  signup(event) {
+    event.preventDefault();
+    const { signupEmail, signupPassword, signupUsername } = this.state;
+    this.props
+      .dispatch(UserActions.createUser({
+        email: signupEmail,
+        password: signupPassword,
+        username: signupUsername
+      }));
+    this.setState({ signupPassword: '' });
+  }
+
+  handleSignout(event) {
+    event.preventDefault();
+    this.props
+      .dispatch(UserActions.logout());
+  }
+
   render() {
-    const { messages } = this.props;
-    const { message } = this.state;
+    const { messages, user, users } = this.props;
+    const {
+      message, userEmail, userPassword, signupEmail, signupUsername,
+      signupPassword, selectedUser, signinSelected, searchUsername
+    } = this.state;
     return (
       <div>
         <div className="app-header row">
           <span><i className="fa fa-comments-o fa-lg" aria-hidden="true"></i> Meteorite Chat</span>
+          {
+            user ?
+            <span onClick={this.handleSignout} style={{float: 'right'}}>
+              <i className="fa fa-sign-out" aria-hidden="true"/>
+            </span>
+            :
+            null
+          }
         </div>
-        <div className="row main">
-          <UsersPanel />
-          <ChatPanel
-            messages={messages}
-            sendMessage={this.sendMessage}
-            message={message}
-            composeMessage={this.composeMessage}
-            enterNewLine={this.enterNewLine}
-          />
-          <div className="col-2">
-            Ads should be here
+        {user ? 
+          <div className="row main">
+            <UsersPanel
+              users={searchUsername ? users.filter(user => user.username.match(searchUsername, 'i')) : users}
+              searchUsername={searchUsername}
+              selectedUser={selectedUser}
+              currentUser={user}
+              selectChatUser={this.selectChatUser}
+              filterUsers={this.onTextInputChange}
+            />
+            {selectedUser._id ? 
+            <ChatPanel
+              messages={messages.filter(
+                message => message.receiver._id === selectedUser._id)
+              }
+              sendMessage={this.sendMessage}
+              message={message}
+              selectedUser={selectedUser}
+              composeMessage={this.composeMessage}
+              enterNewLine={this.enterNewLine}
+            />
+            :
+            <div> Select a user to chat with!!! </div>
+            }
+            <div className="col-2">
+              Ads should be here
+            </div>
           </div>
-        </div>
+          :
+          <div className="auth-page">
+            <div>
+              <div
+                className={`col-6 auth-tab-btn ${signinSelected ?
+                'auth-tab-btn-active': 'auth-tab-btn'}`}
+                onClick={this.toggleAuthTab}
+              >
+                Login
+              </div>
+              <div
+                className={`col-6 auth-tab-btn ${!signinSelected ?
+                'auth-tab-btn-active': 'auth-tab-btn'}`}
+                onClick={this.toggleAuthTab}
+              >
+                Signup
+              </div>
+            </div>
+            {signinSelected ?
+              <LoginForm
+                id='loginForm'
+                email={userEmail}
+                onTextInputChange={this.onTextInputChange}
+                submit={this.login}
+                password={userPassword}
+              />
+              :
+              <SignupForm
+                id='signupForm'
+                email={signupEmail}
+                password={signupPassword}
+                username={signupUsername}
+                submit={this.signup}
+                onTextInputChange={this.onTextInputChange}
+              />
+            }
+          </div>
+        }
         <div className="app-footer row">
           <span>Meteor.js Solution</span>
         </div>
@@ -80,6 +211,8 @@ const ConnectedApp = connect( state => { state })(App);
 
 export default createContainer(() => {
   return {
-    messages: Messages.find({}).fetch()
+    messages: Messages.find({}).fetch(),
+    user: Meteor.user(),
+    users: Accounts.users.find({}).fetch()
   }
 }, ConnectedApp);

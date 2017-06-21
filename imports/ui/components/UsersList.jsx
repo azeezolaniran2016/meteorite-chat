@@ -1,14 +1,23 @@
 import React from 'react';
 import UserListItem from './UserListItem';
 
-const UserList = () => {
-  const users = [
-    {name: 'Olaniran Azeez'}, {name: 'Olaniran Akeem'}, {name: 'Olaniran Ahmed'}
-  ].map((usr, index) => <UserListItem key={index} name={usr.name}/>);
+const UserList = ({
+  users, selectedUser, currentUser,
+  selectChatUser
+}) => {
+  const usersList = users.map((user) => <UserListItem
+      key={user._id}
+      id={user._id}
+      isUser={user._id === currentUser._id}
+      isSelected={selectedUser._id === user._id}
+      name={user.username}
+      click={selectChatUser}
+    />
+  );
   return (
     <div  className="user-list">
       <ul>
-        {users}
+        {usersList}
       </ul>
     </div>
   );

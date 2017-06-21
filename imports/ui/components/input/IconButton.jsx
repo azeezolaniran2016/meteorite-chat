@@ -1,9 +1,9 @@
 import React from 'react'; 
 
 const IconButton = (props) => {
-  const { className, iconName, handleClick, title } = props;
+  const { id, className, iconName, handleClick, title } = props;
   return (
-    <span className={className} onClick={handleClick}>
+    <span id={id} className={className} onClick={handleClick}>
       <i className={iconName} aria-hidden="true" />
     </span>
   );

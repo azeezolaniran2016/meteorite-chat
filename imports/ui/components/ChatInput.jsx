@@ -8,6 +8,7 @@ const ChatInput = (props) => {
     <div className="chat-input">
       <div className="col-11">
         <TextArea
+          id='chatText'
           className="chat-text-input"
           text={message}
           handleChange={composeMessage}
@@ -18,6 +19,7 @@ const ChatInput = (props) => {
       </div>
       <div className="col-1">
         <IconButton
+          id='sendButton'
           className="input-icon"
           iconName="fa fa-send fa-2x"
           handleClick={sendMessage}

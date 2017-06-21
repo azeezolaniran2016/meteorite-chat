@@ -63,7 +63,7 @@ html, body {
   bottom: 1%;
   left: 1%;
   right: 1%;
-  height: 12vh;
+  height: 9vh;
   width: 98%;
   padding: 10px 10px 4px 10px;
   background: #E0E0E0;
@@ -73,8 +73,8 @@ html, body {
   position: absolute;
   left: 1%;
   right: 1%;
-  bottom: 14vh;
-  max-height: 66vh;
+  bottom: 10vh;
+  max-height: 70vh;
   overflow-y: scroll;
   padding: 5px;
   width: 98%;
@@ -140,7 +140,7 @@ html, body {
 
 .chat-text-input {
   width: 100%;
-  height: 9vh;
+  height: 6vh;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -152,8 +152,8 @@ html, body {
 
 .input-icon {
   position: absolute;
-  bottom: 4vh;
-  right: 3%;
+  bottom: 2vh;
+  right: 4%;
   color: #37474F;
 }
 
@@ -192,6 +192,61 @@ html, body {
 
 [class*="col-"] {
     float: left;
+}
+
+.auth-form {
+  padding: 75px 0;
+}
+
+.auth-page {
+  border: 1px solid #90A4AE;
+  width: 50%;
+  height: 50vh;
+  margin:  20vh 25%;
+}
+
+.auth-tab-btn {
+  background-color: #90A4AE;
+  color: #37474F;
+  text-align: center;
+  padding: 10px;
+}
+
+.auth-input-field {
+  width: 80%;
+  padding: 5px;
+  margin: 10px 10%;
+  font-size: 1.2em;
+  outline: none
+}
+
+.auth-submit-btn {
+  width: 60%;
+  padding: 5px;
+  margin: 10px 20%;
+  font-size: 1.2em;
+  background-color: #90A4AE;
+  color: white;
+  outline: none;
+  box-shadow: none;
+}
+
+.auth-submit-btn:hover {
+  background-color: #37474F;
+}
+
+.auth-submit-btn:click {
+  outline: none;
+}
+
+.auth-input-field:focus {
+  border: 1px solid greenyellow;
+}
+
+.auth-tab-btn-active {
+  background-color: #37474F;
+  color: #90A4AE;
+  text-align: center;
 }
 
 /* Rows/Columns */
