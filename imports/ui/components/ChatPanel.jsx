@@ -5,7 +5,6 @@ import ChatInput from './ChatInput';
 const ChatPanel = ({
   sendMessage, messages, composeMessage, message, enterNewLine, selectedUser
 }) => {
-  console.log(messages)
   return (
     <div className="col-7 chat-panel">
       <ChatThread

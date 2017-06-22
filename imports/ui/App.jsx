@@ -88,10 +88,10 @@ class App extends React.Component {
   selectChatUser(event) {
     const { users } = this.props;
     const id = event.target.id;
-    const selectedUser = users.find(user => user._id === id );
+    const user = users.find(user => user._id === id );
     this.setState({ 
       selectedUser: {
-        username: selectedUser.username, _id: selectedUser._id
+        username: user.username, _id: user._id
       }
     });
   }
@@ -146,7 +146,10 @@ class App extends React.Component {
             {selectedUser._id ? 
             <ChatPanel
               messages={messages.filter(
-                message => message.receiver._id === selectedUser._id)
+                message => (message.sender._id === selectedUser._id &&
+                message.receiver._id === user._id) || 
+                (message.sender._id === user._id &&
+                message.receiver._id === selectedUser._id))
               }
               sendMessage={this.sendMessage}
               message={message}
