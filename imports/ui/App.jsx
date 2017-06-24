@@ -57,6 +57,9 @@ class App extends React.Component {
   }
 
   toggleAuthTab() {
+    if (this.state.signinSelected) {
+      return;
+    }
     this.setState({ signinSelected: !this.state.signinSelected });
   }
 
@@ -154,15 +157,15 @@ class App extends React.Component {
               sendMessage={this.sendMessage}
               message={message}
               selectedUser={selectedUser}
+              user={user}
               composeMessage={this.composeMessage}
               enterNewLine={this.enterNewLine}
             />
             :
-            <div> Select a user to chat with!!! </div>
-            }
-            <div className="col-2">
-              Ads should be here
+            <div className='col-7 empty-msg-panel'> 
+              <p>Select a user to chat with!!! </p>
             </div>
+            }
           </div>
           :
           <div className="auth-page">
@@ -203,7 +206,7 @@ class App extends React.Component {
           </div>
         }
         <div className="app-footer row">
-          <span>Meteor.js Solution</span>
+          <span className='footer-text'>Meteor.js Solution</span>
         </div>
       </div>
     );

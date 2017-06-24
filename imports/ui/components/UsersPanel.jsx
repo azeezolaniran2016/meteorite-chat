@@ -3,10 +3,11 @@ import UserListSearch from './UserListSearch';
 import UsersList from './UsersList';
 
 const UsersPanel = ({
-  users, selectedUser, currentUser, selectChatUser, searchUsername, filterUsers
+  users, selectedUser, currentUser,
+  selectChatUser, searchUsername, filterUsers
 }) => {
   return (
-    <div className="col-3 users-panel">
+    <div className="col-4 users-panel">
       <UserListSearch
         search={filterUsers}
         searchUsername={searchUsername}
