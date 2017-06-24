@@ -17,7 +17,7 @@ class ChatThread extends React.Component {
     const msgItems = messages.map((msg, index) => {
         prevId = index > 0 ? messages[index - 1].sender._id : null;
         return (<ChatMessage
-          className={`chat-message ${selectedUser._id === msg.sender._id ? 'msg-out': 'msg-in'}`}
+          className={`${selectedUser._id === msg.sender._id ? 'msg-in': 'msg-out'}`}
           key={msg._id}
           id={msg._id}
           message={msg.message}

@@ -85,10 +85,6 @@ html, body {
   border-right: 1px solid $divider-color;
 }
 
-.user-name {
-  font-family: 'Goudy Bookletter 1911', cursive, sans-serif;
-}
-
 .user-list {
   border-top: 1px solid gray;
   margin-top: 10px;
@@ -158,10 +154,15 @@ html, body {
   ul {
     @extend .common-ul;
     li {
-      border: 1px solid $divider-color;
       border-radius: 5px;
       padding: 5px;
       margin-top: 5px;
+    }
+    li.msg-out {
+      background-color: #455A64;
+    }
+    li.msg-in {
+      background-color: #3F51B5;
     }
   }
 }
@@ -181,7 +182,7 @@ html, body {
     animation-iteration-count: infinite;
   } 
 }
-.msg-in {
+.msg-out {
   margin-left: 10%;
   margin-right: 1%;
   .user-name {
@@ -189,30 +190,34 @@ html, body {
   }
 }
 
-.msg-out {
+.msg-in {
   margin-right: 10%;
   .user-name {
     color: #03A9F4;
   }
 }
 
-.msg-time {
-  color: #90A4AE;
-  float: right;
-  font-size: .7em;
-  vertical-align: baseline;
-}
-
-.msg-head {
-  padding: 3px 0;
-  min-width: 100%;
-  width: 100%;
-  border-bottom: 1px solid #607D8B;
-}
-
 .msg-body {
-  font-size: 1em;
   font-family: 'Average Sans', cursive, sans-serif;
+  position: relative;
+  // .msg-time, .user-name {
+  //   font-family: 'Goudy Bookletter 1911', cursive, sans-serif;
+  // }
+  .msg-time {
+    display: none;
+    font-size: .7em;
+    color: #CDDC39;
+    margin-left: 1%;
+  }
+  .user-name {
+    display: block;
+    font-size: 1em;
+  }
+  &:hover{
+    .msg-time {
+      display: inline-block;
+    }
+  }
 }
 
 .chat-text-input {
