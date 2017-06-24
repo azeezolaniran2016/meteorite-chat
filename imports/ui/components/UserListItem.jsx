@@ -12,7 +12,7 @@ const UserListItem = (props) => {
         id={id}
         className="user-name"
       >
-        <span id={id} style={{color: `${isUser ? '#395' : ''}`}}>{name} {isUser ? '(Me)' : ''}</span>
+        <span id={id} style={{color: `${isUser ? '#00BCD4' : ''}`}}>{name}</span>
         <span id={id}
           style={{float: 'right', color: '#69F0AE', backgroundColor: `${isSelected ? '#607D8B': ''}`}}
           className="online"
