@@ -56,11 +56,15 @@ class App extends React.Component {
     this.setState({ message: ''});
   }
 
-  toggleAuthTab() {
-    if (this.state.signinSelected) {
-      return;
+  toggleAuthTab(event) {
+    const { signinSelected } = this.state;
+    const { id } = event.target;
+    if (id === 'signinTab' && !signinSelected )
+      this.setState({ signinSelected: true });
+    if (id === 'signupTab' && signinSelected) {
+      this.setState({ signinSelected: false })
     }
-    this.setState({ signinSelected: !this.state.signinSelected });
+
   }
 
   enterNewLine(e) {
@@ -171,6 +175,7 @@ class App extends React.Component {
           <div className="auth-page">
             <div>
               <div
+                id='signinTab'
                 className={`col-6 auth-tab-btn ${signinSelected ?
                 'auth-tab-btn-active': 'auth-tab-btn'}`}
                 onClick={this.toggleAuthTab}
@@ -178,6 +183,7 @@ class App extends React.Component {
                 Login
               </div>
               <div
+                id='signupTab'
                 className={`col-6 auth-tab-btn ${!signinSelected ?
                 'auth-tab-btn-active': 'auth-tab-btn'}`}
                 onClick={this.toggleAuthTab}
